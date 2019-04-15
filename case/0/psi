@@ -1,0 +1,51 @@
+// Magnetic scalar potential, units of Ampere
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      psi;
+}
+
+// respective units: kg, m, s, K, mol, A, candela
+dimensions      [0 0 0 0 0 1 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    magnet_surface_top
+    {
+        type    fixedValue;
+        value   uniform 1;
+    }
+
+    magnet_surface_bottom
+    {
+        type    fixedValue;
+        value   uniform -1;
+    }
+
+    magnet_surface_side
+    {
+        type    fixedValue;
+        value   $internalField;
+    }
+
+    fringe
+    {
+        type    fixedValue;
+        value   $internalField;
+    }
+
+    wedge0
+    {
+        type    wedge;
+    }
+
+    wedge1
+    {
+        type    wedge;
+    }
+}
